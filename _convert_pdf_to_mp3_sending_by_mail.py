@@ -83,7 +83,7 @@ def sending_file(FileMP3Name):
 
 # intractive part
 FilePath = input(("\nPlease enter PDF file path: ")).replace('"', '')
-Language = input("\nPlease enter language: ")
+Language = input("\nPlease enter language (en/ru/fr etc): ")
 FileMP3Name = input(("\nPlease enter name for MP3 file: ")).replace('.mp3', '')
 while file_exists(FilePath) != True:
     print("Provided path does not exist locally, please enter correct one")    
