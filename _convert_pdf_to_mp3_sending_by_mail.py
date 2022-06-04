@@ -5,7 +5,7 @@
         KeepCalmWherever
         
     Purposes: 
-        learning pythong :)
+        learning python :)
         
     Functions:
         def sending_file(FileMP3Name):
