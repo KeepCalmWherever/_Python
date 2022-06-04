@@ -92,4 +92,5 @@ while file_exists(FilePath) != True:
 ConvertPDFtoMP3(FilePath, Language, FileMP3Name)
 isSend = input("\nDo you want to share generated MP3 file by mail? (Yes/No)")
 if isSend == "Yes":
-    sending_file(FileMP3Name)
+    FileMP3Name = FileMP3Name + '.mp3'
+    sending_file()
