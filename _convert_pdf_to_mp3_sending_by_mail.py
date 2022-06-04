@@ -1,4 +1,4 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""
     .Synopsis
     
     Author: 
@@ -24,7 +24,7 @@
     Comment:         
         For public SMTP servers (example mail or gmail) it should be configured external application access in account settings
                 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""
 # import part
 from os.path import exists as file_exists
 from gtts import gTTS
@@ -92,5 +92,4 @@ while file_exists(FilePath) != True:
 ConvertPDFtoMP3(FilePath, Language, FileMP3Name)
 isSend = input("\nDo you want to share generated MP3 file by mail? (Yes/No)")
 if isSend == "Yes":
-    FileMP3Name = FileMP3Name + '.mp3'
-    sending_file()
+    sending_file(FileMP3Name)
