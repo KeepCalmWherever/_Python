@@ -1,10 +1,30 @@
-"""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     .Synopsis
 
-    Author: KeepCalmWherever
-    Purposes: learning pythong :)
-
-"""""
+    Author: 
+        KeepCalmWherever
+        
+    Purposes: 
+        learning pythong :)
+        
+    Functions:
+        def sending_file(FileMP3Name):
+            Params:
+                PDF file path, var name - FilePath
+                Language, var name - Language
+                Name for MP3 file, var name - FileMP3Name
+                    
+        def ConvertPDFtoMP3(Filepath, language, FileMP3Name)
+            Params:
+                Sender address, var name - sender_address
+                Sender password, var name - sender_pass
+                Received address, var name - receiver_address
+                SMTP server name, var name smtp
+                
+    Comment:         
+        For public SMTP servers (example mail or gmail) it should be configured external application access in account settings
+                
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # import part
 from os.path import exists as file_exists
 from gtts import gTTS
