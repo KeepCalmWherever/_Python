@@ -51,7 +51,7 @@ def ConvertPDFtoMP3(Filepath, language, FileMP3Name):
     
 # send doc to mail
 def sending_file(FileMP3Name):
-    mail_content = f'Please find in attached file MP3 version of {FileMP3Name}'
+    mail_content = f'Please find in attachment {FileMP3Name}'
     #The mail addresses and password
     sender_address = input("\nPlease enter your email address: ")
     sender_pass = getpass("\nPlease enter your password: ")
