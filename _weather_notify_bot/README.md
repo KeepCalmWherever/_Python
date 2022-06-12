@@ -1,4 +1,4 @@
-"""""""""
+
     .Synopsis
     
     Author: 
@@ -63,5 +63,3 @@
             def checkweather(period) - period for weather checking 1, 2 and 3 days, thise periods are restricted by API resource
     Comment:         
         Thanks https://www.weatherapi.com for free API requests which are enough in learning purposes :)
-                
-"""""""""
