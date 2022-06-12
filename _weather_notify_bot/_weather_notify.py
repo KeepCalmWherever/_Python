@@ -1,5 +1,13 @@
-# https://www.weatherapi.com/docs/
-# So to get current weather for London: JSON: http://api.weatherapi.com/v1/current.json?key=<YOUR_API_KEY>&q=London
+"""""""""
+    .Synopsis
+    
+    Author: 
+        KeepCalmWherever
+        
+    Purposes: 
+        Tried to develop telegram bot which requires you to authenticate via email and then shows weather with period from 1 to 3 days (for free API requests it's limited as this :) )
+
+"""""""""
 
 import json, telebot, smtplib, random, re, os, requests
 from email.mime.text import MIMEText
@@ -227,7 +235,7 @@ def start(message):
 
 @ourbot.message_handler(commands=['help'])
 def start(message):
-    ourbot.send_message(message.chat.id, '/start - to start work with bot \n/registration - to perform registration \n/validatecode - to confirm code for registration \n/setcity - to determine your city\n/checkweather - to check weather')
+    ourbot.send_message(message.chat.id, '/start - to start work with bot \n/registration - to perform registration \n/validatecode - to confirm code for registration \n/setcity - to determine your city \n/checkweather - to check weather')
 
 # commands
 @ourbot.message_handler(content_types=["text"])
