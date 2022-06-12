@@ -306,7 +306,8 @@ def message_handler(message):
             else:
                 ourbot.send_message(message.chat.id, 'Registration is not completed yet, please pass /registration')             
     else:
-        ourbot.send_message(message.chat.id, 'Incorrect request, to see list commands /help')  
+        ourbot.send_message(message.chat.id, 'Incorrect request, to see list commands /help')
+          
 # registration
 def registration(email):   
     checkformat = _parseaddress(email)
