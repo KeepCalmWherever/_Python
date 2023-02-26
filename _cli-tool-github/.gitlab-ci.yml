@@ -1,0 +1,126 @@
+stages:
+  - test
+  - build-cli-tool-image
+  - publish-cli-tool
+  - create-mr-to-main
+
+.docker-login:
+  before_script:
+    - docker login --username $DOCKER_USER --password $DOCKER_PASS
+
+pep8-check-style:
+  stage: test
+  image: eeacms/pep8:1.7.0.3
+  script:
+    - pep8 .
+  tags:
+    - docker-runner 
+  allow_failure: true
+
+include:
+  - template: Security/SAST.gitlab-ci.yml
+semgrep-sast:
+  stage: test
+  artifacts:
+    paths:
+      - gl-sast-report.json
+  tags:
+    - docker-runner 
+
+unit-pytest-locally:
+  stage: test
+  image: python:3.6
+  script:
+    - |
+      python3 -V 
+      pip install --upgrade pip 
+      pip install -r requirements.txt
+      pip install pytest
+      pytest -s -v CLI-List-GitHub-Issues.py
+  tags:
+    - docker-runner 
+
+build-cli-tool-image:
+  stage: build-cli-tool-image
+  image: docker:cli
+  extends: .docker-login
+  needs:
+    - job: unit-pytest-locally
+      artifacts: false
+    - job: semgrep-sast
+      artifacts: false
+    - job: pep8-check-style
+      artifacts: false
+  script:
+    - |  
+      ls
+      docker --version
+      echo "Building image with name $IMAGE_NAME"
+      docker build -t "$DOCKER_USER/$IMAGE_NAME" . 
+  tags:
+    - docker-runner 
+
+warming-up-run-cli-tool:
+  stage: build-cli-tool-image
+  image: docker:cli
+  needs:
+    - job: build-cli-tool-image 
+      artifacts: false
+  script:
+    - |
+      echo "Run devopshqissues tool:"
+      docker --version
+      echo "Run with key --get-all-issues:"
+      docker run "$DOCKER_USER/$IMAGE_NAME" --get-all-issues
+      echo "Run without keys:"
+      docker run "$DOCKER_USER/$IMAGE_NAME"
+      echo "Run with key --help:"
+      docker run "$DOCKER_USER/$IMAGE_NAME" --help
+  tags:
+    - docker-runner 
+
+publish-cli-tool:
+  stage: publish-cli-tool
+  image: docker:cli
+  extends: .docker-login
+  needs:
+    - job: warming-up-run-cli-tool
+      artifacts: false
+  script:
+    - |
+      echo "Run devopshqissues tool:"
+      docker --version
+      docker push "$DOCKER_USER/$IMAGE_NAME"
+  tags:
+    - docker-runner 
+
+create-mr-to-main:
+  stage: create-mr-to-main
+  image: tmaier/gitlab-auto-merge-request:1
+  needs:
+    - job: publish-cli-tool
+      artifacts: false
+  before_script: []
+  variables:
+    GIT_STRATEGY: none
+  only:
+    - /^develop/*/
+  script:
+    - merge-request.sh
+  tags: 
+    - docker-runner 
+
+notify-mr-to-telegram:
+  stage: create-mr-to-main
+  image: curlimages/curl:7.88.1
+  needs:
+    - job: publish-cli-tool
+      artifacts: false
+  only:
+    - /^develop/*/
+  script:
+    - |
+      echo "Sending notify to telegram chat"
+      curl -X POST -H "Content-type: application/json" --data '{"chat_id":"'${TELEGRAM_CHAT_ID}'", "text":"[REVIEW MERGE REQUEST] New merge request has been raised for main branch and opened now"}' $TELEGRAM_BOT_LINK
+  tags: 
+    - docker-runner
