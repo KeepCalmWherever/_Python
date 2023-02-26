@@ -57,7 +57,7 @@ Variables are determined in CI/CD section in project settings
   - DOCKER_PASS               - password from dockerhub account
   - DOCKER_USER               - uname from dockerhub account
   - GITLAB_PRIVATE_TOKEN      - your pat
-  - IMAGE_NAME                - image name, format like yourlogin/devopshq:latest
+  - IMAGE_NAME                - image name, format like yourlogin/devopshqissues:latest
   - TELEGRAM_BOT_LINK         - https://api.telegram.org/bot'yourtokenbot'/sendMessage
   - TELEGRAM_CHAT_ID          - telegram chat id
 
