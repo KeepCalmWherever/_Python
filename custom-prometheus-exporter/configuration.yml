@@ -1,0 +1,13 @@
+scape_interval: 60
+exporter_port: 8080
+exporter_address: 127.0.0.1
+endpoint_timeout: 10
+endpoints:
+  - https://google.com
+  - https://yandex.com
+  - https://github.com
+  - https://linux.com
+  - https://ansible.com
+  - https://stackoverflow.com
+  - https://linkedin.com
+  - https://telegram.com

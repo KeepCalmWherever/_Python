@@ -1,0 +1,4 @@
+gtts
+pdfplumber==0.1.2
+smtplib
+email

@@ -1,10 +1,10 @@
-
+## weather-notify-bot
     .Synopsis
-    
-    Author: 
+
+    Author:
         KeepCalmWherever
-        
-    Purposes: 
+
+    Purposes:
         Tried to develop telegram bot which requires you to authenticate via email and then shows weather with period from 1 to 3 days (for free API requests it's limited as this :) )
 
         About script flow, firstly to use this bot you need to have public account for email notification, while first running script requires from you enter next params:
@@ -42,7 +42,7 @@
                 "city": "dummy"
             }....
         ]
-           
+
     Functions:
         outside bot:
             def convert_json(weather_json, range_ = None)
@@ -50,16 +50,16 @@
             def _collect_weather_info(params) - api function itself, works only with http://api.weatherapi.com/v1 but can be tuned easily for other APIs, extracts weather data
             def _create_reg_file() - saves initial file with dummy user
             def _generateCodeAndlog(email) - saves intial data about user and saved as well code for verification
-            def _sendmail(email, code = None, notify = None) - send notify email with code to pass verification and if code matches after it sends confirmation email 
+            def _sendmail(email, code = None, notify = None) - send notify email with code to pass verification and if code matches after it sends confirmation email
             def _parseaddress(email) - checks if entered email is valid or not
 
         inside bot handler:
-            def start(message) - start command 
+            def start(message) - start command
             def message_handler(message) - parser for text entered by user in bot
             def registration(email) - to initiate registration steps, user will need to enter email address and after pass /validatecode
             def valid_code(auth) - to validate code if user provides the same code as received by entered email, if they match confirmation email is sent to him after
             def setcity(city) - set city name for checking weather, might be changed by passing /setcity, saved in _registration_logs.json file
             def save_json(second) - save city name in _registration_logs.json or update currenct value
             def checkweather(period) - period for weather checking 1, 2 and 3 days, thise periods are restricted by API resource
-    Comment:         
+    Comment:
         Thanks https://www.weatherapi.com for free API requests which are enough in learning purposes :)
